@@ -3,4 +3,4 @@ select
     first_name,
     last_name
 
-from {{source('jaffle_shop', 'raw_customers') }}
+from {{ source('jaffle_shop', 'raw_customers') }}
