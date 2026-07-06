@@ -1,30 +1,34 @@
-with orders as  (
-    select * from {{ ref ('stg_jaffle_shop__orders') }}
+with customers as (
+    select * from {{ ref('stg_jaffle_shop__customers') }}
 ),
 
-payments as (
-    select * from {{ ref ('stg_stripe__payments') }}
+orders as (
+    select * from {{ ref('stg_jaffle_shop__orders') }}
 ),
 
-order_payments as (
+customer_orders as (
     select
-        order_id,
-        sum (case when status = 'success' then amount end) as amount
+        customer_id,
+        min(order_date) as first_order_date,
+        max(order_date) as most_recent_order_date,
+        count(order_id) as number_of_orders
 
-    from payments
+    from orders
     group by 1
 ),
 
- final as (
+final as (
 
     select
-        orders.order_id,
-        orders.customer_id,
-        orders.order_date,
-        coalesce (order_payments.amount, 0) as amount
+        customers.customer_id,
+        customers.first_name,
+        customers.last_name,
+        customer_orders.first_order_date,
+        customer_orders.most_recent_order_date,
+        coalesce(customer_orders.number_of_orders, 0) as number_of_orders
 
-    from orders
-    left join order_payments on orders.order_id = order_payments.order_id
+    from customers
+    left join customer_orders on customers.customer_id = customer_orders.customer_id
 )
 
 select * from final

@@ -1,10 +1,17 @@
 sources:
   - name: jaffle_shop
+    description: A clone of a Postgres database
     database: dev_ae_upskilling
     schema: an
     tables:
       - name: raw_customers
-      # - name: raw_payments
+        description: Raw customers data
+        columns:
+          - name: id
+            description: primary key
+            data_tests:
+              - unique
+              - not_null        
       - name: raw_orders
         config:
           freshness:

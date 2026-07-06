@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "**/dbt_packages": true,
+    "**/target": true,
+    "**/logs": true
+  }
+}

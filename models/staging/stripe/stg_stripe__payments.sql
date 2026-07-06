@@ -5,4 +5,4 @@ select
     status,
     created as created_at,
     amount / 100 as amount
-from dev_ae_upskilling.an.raw_stripe_payment
+from {{ source('stripe', 'raw_stripe_payment') }} 

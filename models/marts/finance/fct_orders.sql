@@ -27,5 +27,5 @@ order_payments as (
     left join order_payments on orders.order_id = order_payments.order_id
 )
 
-select * from final;
+select * from final
 

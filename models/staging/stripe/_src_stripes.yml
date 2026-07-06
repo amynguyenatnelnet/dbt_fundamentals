@@ -1,0 +1,11 @@
+sources:
+  - name: stripe
+    database: dev_ae_upskilling
+    schema: an
+    tables:
+      - name: raw_stripe_payment
+        config:
+          loaded_at_field: _batched_at
+          freshness:
+            warn_after: {count: 12, period: hour}
+            error_after: {count: 24, period: hour}
