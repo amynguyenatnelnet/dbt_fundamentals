@@ -4,5 +4,5 @@ select
     paymentmethod as payment_method,
     status,
     created as created_at,
-    amount / 100 as amount
+    {{ cents_to_dollars('amount') }} as amount
 from {{ source('stripe', 'raw_stripe_payment') }} 
