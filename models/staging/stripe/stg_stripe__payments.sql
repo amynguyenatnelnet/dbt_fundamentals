@@ -6,3 +6,5 @@ select
     created as created_at,
     {{ cents_to_dollars('amount') }} as amount
 from {{ source('stripe', 'raw_stripe_payment') }} 
+
+-- version: branch-two
