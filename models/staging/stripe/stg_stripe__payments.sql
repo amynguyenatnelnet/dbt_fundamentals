@@ -7,4 +7,8 @@ select
     {{ cents_to_dollars('amount') }} as amount
 from {{ source('stripe', 'raw_stripe_payment') }} 
 
+<<<<<<< HEAD
 -- version: branch-two
+=======
+-- version: branch-one
+>>>>>>> feature/branch-one
